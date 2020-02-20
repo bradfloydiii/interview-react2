@@ -1,0 +1,17 @@
+.col-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+}
+
+.log-container {
+    min-height: 300px;
+    /* border: 1px solid #777; */
+    padding: 15px;
+}
+
+.header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #777;
+}
