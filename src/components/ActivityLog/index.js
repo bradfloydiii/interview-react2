@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogItem } from '../LogItem';
+import { ActivityLogItem } from '../ActivityLogItem';
 
 import './ActivityLog.css';
 
@@ -15,7 +15,7 @@ export const ActivityLog = props => {
           <div className='col col-header'>Description</div>
         </div>
         {props.activities.map((activity, index) => {
-          return <LogItem key={index} activity={activity} />;
+          return <ActivityLogItem key={index} activity={activity} />;
         })}
       </div>
     </div>

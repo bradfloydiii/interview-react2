@@ -24,6 +24,7 @@ export class Clock extends Component {
       stop: '',
       readableDate: Utilities.getReadableDate(),
       duration: 0,
+      completed: false,
       description: this.state.task
     };
 

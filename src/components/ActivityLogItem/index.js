@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class LogItem extends Component {
+export class ActivityLogItem extends Component {
   id = 0;
 
   state = {
@@ -8,12 +8,18 @@ export class LogItem extends Component {
   };
 
   componentDidMount() {
-    this.id = setInterval(this.renderDuration, 1000);
+    if(this.props.activity.completed) {
+      this.setState({duration: this.props.activity.duration});
+    } else {
+      this.id = setInterval(this.renderDuration, 1000);
+    }
   }
 
   componentDidUpdate() {
-    if(this.props.activity.stop !== '')
+    if(this.props.activity.completed) {
+      this.props.activity.duration = this.state.duration;
       clearInterval(this.id)
+    }
   }
 
   renderDuration = () => {

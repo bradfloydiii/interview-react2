@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Queue.css';
 
 export class Queue extends Component {
-
   stopTask = e => {
     this.props.stopTask(e.target.id);
   };
@@ -10,16 +9,18 @@ export class Queue extends Component {
   render() {
     return (
       <div className='queue'>
-        {this.props.activities.filter(activity => activity.stop === '').map((activity, index) => {
-          return (
-            <button
-              className='btn btn-danger'
-              key={index}
-              id={activity.id}
-              onClick={this.stopTask}
-            >{`Clock Out - ${activity.description}`}</button>
-          );
-        })}
+        {this.props.activities
+          .filter(activity => !activity.completed)
+          .map((result, index) => {
+            return (
+              <button
+                className='btn btn-danger'
+                key={index}
+                id={result.id}
+                onClick={this.stopTask}
+              >{`Clock Out - ${result.description}`}</button>
+            );
+          })}
       </div>
     );
   }
