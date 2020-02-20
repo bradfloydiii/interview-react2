@@ -4,7 +4,20 @@ import './Queue.css';
 export class Queue extends Component {
   stopTask = e => {
     this.props.stopTask(e.target.id);
+    this.removeButton(e.target.id);
   };
+
+  removeButton(id) {
+    let elem = document.getElementById(id);
+    elem.parentNode.removeChild(elem);
+  }
+
+  componentDidUpdate() {
+    console.log(
+      'Queue',
+      this.props.activities.filter(activity => !activity.completed)
+    );
+  }
 
   render() {
     return (

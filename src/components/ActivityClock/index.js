@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Utilities } from '../../services/Utilities';
 import cuid from 'cuid';
 
-export class Clock extends Component {
+export class ActivityClock extends Component {
   constructor(props) {
     super(props);
 

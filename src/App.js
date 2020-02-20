@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Clock } from './components/Clock';
+import { ActivityClock } from './components/ActivityClock';
 import { ActivityLog } from './components/ActivityLog';
 import { Queue } from './components/Queue';
 import { Utilities } from './services/Utilities';
@@ -18,7 +18,6 @@ class App extends Component {
 
   componentDidMount() {
     if (sessionStorage.getItem(Utilities.key)) {
-      console.log('loaded from sesssion', this.state.activities);
       this.setState({
         activities: Utilities.getSessionItem()
       });
@@ -26,14 +25,12 @@ class App extends Component {
   }
 
   startTask = task => {
-    // this.setState({ activities: this.state.activities.concat(task) });
     this.setState(
       ({ activities }) => ({
         activities: [...activities, task]
       }),
       // Completion callback
       () => {
-        console.log(this.activities, task);
         Utilities.saveSessionItem(this.state.activities);
       }
     );
@@ -56,7 +53,7 @@ class App extends Component {
   render() {
     return (
       <div className='container'>
-        <Clock startTask={this.startTask} />
+        <ActivityClock startTask={this.startTask} />
         <Queue activities={this.state.activities} stopTask={this.stopTask} />
         <ActivityLog activities={this.state.activities} />
         <button className='btn btn-warning' onClick={this.clearSession}>
