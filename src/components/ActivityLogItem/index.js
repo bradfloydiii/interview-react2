@@ -8,24 +8,26 @@ export class ActivityLogItem extends Component {
   };
 
   componentDidMount() {
-    if(this.props.activity.completed) {
-      this.setState({duration: this.props.activity.duration});
+    if (this.props.activity.completed) {
+      this.setState({ duration: this.props.activity.duration });
     } else {
       this.id = setInterval(this.renderDuration, 1000);
     }
   }
 
   componentDidUpdate() {
-    if(this.props.activity.completed) {
-      this.props.activity.duration = this.state.duration;
-      clearInterval(this.id)
+    if (this.props.activity.completed) {
+      clearInterval(this.id);
     }
   }
 
   renderDuration = () => {
-    this.setState({
-      duration: (Date.now() - this.props.activity.start) / 1000
-    });
+    this.setState(
+      {
+        duration: (Date.now() - this.props.activity.start) / 1000
+      },
+      () => (this.props.activity.duration = this.state.duration)
+    );
   };
 
   render() {
