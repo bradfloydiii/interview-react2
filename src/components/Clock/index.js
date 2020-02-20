@@ -7,7 +7,6 @@ export class Clock extends Component {
     super(props);
 
     this.state = {
-      count: 1,
       task: ''
     };
   }

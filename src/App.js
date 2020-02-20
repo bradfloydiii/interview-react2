@@ -8,8 +8,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends Component {
-  // activities = []; // state variable for all tasks clocked-in since setState can't be trusted
-
   constructor() {
     super();
 
@@ -28,14 +26,23 @@ class App extends Component {
   }
 
   startTask = task => {
-    this.setState({ activities: this.state.activities.concat(task) });
-
-    console.log(this.activities, task);
-    Utilities.saveSessionItem(this.state.activities);
+    // this.setState({ activities: this.state.activities.concat(task) });
+    this.setState(
+      ({ activities }) => ({
+        activities: [...activities, task]
+      }),
+      // Completion callback
+      () => {
+        console.log(this.activities, task);
+        Utilities.saveSessionItem(this.state.activities);
+      }
+    );
   };
 
   stopTask = id => {
-    let activity = this.state.activities.filter(activity => activity.id === id)[0];
+    let activity = this.state.activities.filter(
+      activity => activity.id === id
+    )[0];
     activity.stop = Utilities.getReadableDate();
     activity.completed = true;
     Utilities.saveSessionItem(this.state.activities);
