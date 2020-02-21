@@ -5,6 +5,7 @@ export const Utilities = {
     sessionStorage.setItem(Utilities.key, JSON.stringify(item));
   },
   getSessionItem: () => JSON.parse(sessionStorage.getItem(Utilities.key)),
+  removeSessionItem: () => { sessionStorage.removeItem(Utilities.key) },
   clearSession: () => {
     sessionStorage.clear();
   }

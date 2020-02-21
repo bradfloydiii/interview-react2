@@ -9,7 +9,8 @@ export class Queue extends Component {
 
   removeActivityButton(id) {
     let elem = document.getElementById(id);
-    elem.parentNode.removeChild(elem);
+    if(elem && elem.parentNode)
+      elem.parentNode.removeChild(elem);
   }
 
   render() {

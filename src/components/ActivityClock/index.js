@@ -3,13 +3,11 @@ import { Utilities } from '../../services/Utilities';
 import cuid from 'cuid';
 
 export class ActivityClock extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    task: ''
+  };
 
-    this.state = {
-      task: ''
-    };
-  }
+  status = '';
 
   clearTaskEntry = e => {
     if (e) e.target.value = '';
@@ -17,6 +15,10 @@ export class ActivityClock extends Component {
   };
 
   startTask = () => {
+    if (this.state.task === '') {
+      return;
+    }
+    this.status = '';
     let task = {
       id: cuid(),
       start: Date.now(),
@@ -43,7 +45,7 @@ export class ActivityClock extends Component {
           <div className='col'>
             <input
               type='text'
-              className='form-control'
+              className={`form-control ${this.status}`}
               id='activity'
               placeholder='Enter an activity'
               value={this.state.task}
@@ -52,7 +54,11 @@ export class ActivityClock extends Component {
             />
           </div>
           <div className='col'>
-            <button id="startTask" className='btn btn-primary' onClick={this.startTask}>
+            <button
+              id='startTask'
+              className='btn btn-primary'
+              onClick={this.startTask}
+            >
               Clock In
             </button>
           </div>

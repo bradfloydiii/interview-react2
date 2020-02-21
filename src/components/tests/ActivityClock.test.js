@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ActivityClock } from '../ActivityClock';
 
-describe('ActivityClock test suite', () => {
+describe('<ActivityClock />', () => {
 
   it('has an input field to name a task', () => {
     let fixture = shallow(<ActivityClock />);
@@ -23,14 +23,34 @@ describe('ActivityClock test suite', () => {
     expect(input.instance().value).toEqual('');
   });
 
+  it('should clear input when a task is started', () => {
+    let startTask = () => {};
+    let fixture = mount(<ActivityClock startTask={ startTask } />);
+    const input = fixture.find('input');
+    const btn = fixture.find('button');
+    input.simulate('change', { target: { value: 'Test' } });
+    btn.simulate('click');
+    expect(input.instance().value).toEqual('');
+  });
+
   it('should start a task when button is clicked', () => {
     const startTaskSpy = jest.fn();
-    let fixture = mount(<ActivityClock startTask={startTaskSpy} />);
+    let fixture = mount(<ActivityClock startTask={ startTaskSpy } />);
     const input = fixture.find('input');
     const btn = fixture.find('button');
     input.simulate('change', { target: { value: 'Test' } });
     btn.simulate('click');
     expect(startTaskSpy).toHaveBeenCalledTimes(1);
-  })
+  });
+
+  it('should not allow an empty task to be tracked', () => {
+    const startTaskSpy = jest.fn();
+    let fixture = mount(<ActivityClock startTask={ startTaskSpy } />);
+    const input = fixture.find('input');
+    const btn = fixture.find('button');
+    input.simulate('change', { target: { value: '' } });
+    btn.simulate('click');
+    expect(startTaskSpy).toHaveBeenCalledTimes(0);
+  });
 
 });

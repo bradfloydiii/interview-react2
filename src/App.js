@@ -8,13 +8,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      activities: []
-    };
-  }
+  state = {
+    activities: []
+  };
 
   componentDidMount() {
     if (sessionStorage.getItem(Utilities.key)) {
@@ -45,9 +41,9 @@ class App extends Component {
     Utilities.saveSessionItem(this.state.activities);
   };
 
-  clearSession = () => {
+  removeSession = () => {
     this.setState({ activities: [] });
-    Utilities.clearSession();
+    Utilities.removeSessionItem();
   };
 
   render() {
@@ -57,9 +53,9 @@ class App extends Component {
         <ActivityClock startTask={this.startTask} />
         <Queue activities={this.state.activities} stopTask={this.stopTask} />
         <ActivityLog activities={this.state.activities} />
-        {/* <button className='btn btn-warning' onClick={this.clearSession}>
+        <button className='btn btn-warning' onClick={this.removeSession}>
           Clear Session
-        </button> */}
+        </button>
       </div>
     );
   }
