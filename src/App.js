@@ -53,12 +53,13 @@ class App extends Component {
   render() {
     return (
       <div className='container'>
+        <div className="header mb-3">Clock In/Out</div>
         <ActivityClock startTask={this.startTask} />
         <Queue activities={this.state.activities} stopTask={this.stopTask} />
         <ActivityLog activities={this.state.activities} />
-        <button className='btn btn-warning' onClick={this.clearSession}>
+        {/* <button className='btn btn-warning' onClick={this.clearSession}>
           Clear Session
-        </button>
+        </button> */}
       </div>
     );
   }

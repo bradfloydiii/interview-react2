@@ -52,7 +52,7 @@ export class ActivityClock extends Component {
             />
           </div>
           <div className='col'>
-            <button className='btn btn-primary' onClick={this.startTask}>
+            <button id="startTask" className='btn btn-primary' onClick={this.startTask}>
               Clock In
             </button>
           </div>

@@ -4,19 +4,12 @@ import './Queue.css';
 export class Queue extends Component {
   stopTask = e => {
     this.props.stopTask(e.target.id);
-    this.removeButton(e.target.id);
+    this.removeActivityButton(e.target.id);
   };
 
-  removeButton(id) {
+  removeActivityButton(id) {
     let elem = document.getElementById(id);
     elem.parentNode.removeChild(elem);
-  }
-
-  componentDidUpdate() {
-    console.log(
-      'Queue',
-      this.props.activities.filter(activity => !activity.completed)
-    );
   }
 
   render() {
@@ -27,7 +20,7 @@ export class Queue extends Component {
           .map((result, index) => {
             return (
               <button
-                className='btn btn-danger'
+                className='btn btn-danger mb-2'
                 key={index}
                 id={result.id}
                 onClick={this.stopTask}
