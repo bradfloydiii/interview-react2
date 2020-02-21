@@ -53,9 +53,9 @@ class App extends Component {
         <ActivityClock startTask={this.startTask} />
         <Queue activities={this.state.activities} stopTask={this.stopTask} />
         <ActivityLog activities={this.state.activities} />
-        <button className='btn btn-warning' onClick={this.removeSession}>
+        {/* <button className='btn btn-warning' onClick={this.removeSession}>
           Clear Session
-        </button>
+        </button> */}
       </div>
     );
   }
